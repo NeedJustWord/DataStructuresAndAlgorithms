@@ -9,6 +9,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// <para>然后，我们每次从桌子上拿走一张牌并将它插入左手中正确的位置。</para>
     /// <para>为了找到一张牌的正确位置，我们从右到左将它与已在手中的每张牌进行比较。</para>
     /// <para>拿在左手上的牌总是排序好的，原来这些牌是桌子上牌堆中顶部的牌。</para>
+    /// <para>时间复杂度：最好情况：O(n)，最坏情况：O(n^2)</para>
     /// </summary>
     class InsertionSort : BaseSort
     {
