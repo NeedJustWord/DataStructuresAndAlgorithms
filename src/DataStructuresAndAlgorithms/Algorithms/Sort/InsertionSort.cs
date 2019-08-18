@@ -10,18 +10,20 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// <para>为了找到一张牌的正确位置，我们从右到左将它与已在手中的每张牌进行比较。</para>
     /// <para>拿在左手上的牌总是排序好的，原来这些牌是桌子上牌堆中顶部的牌。</para>
     /// </summary>
-    class InsertionSort : ISort
+    class InsertionSort : BaseSort
     {
-        public void Sort<T>(T[] array) where T : IComparable<T>
+        public override void Sort<T>(T[] array, bool sortAsc)
         {
             T key;
             int i;
+            var func = sortAsc ? (Func<T, T, bool>)Asc : Desc;
+
             for (int j = 1; j < array.Length; j++)
             {
                 key = array[j];
                 //将array[j]插入到已排好序的序列array[0...j-1]
                 i = j - 1;
-                while (i > -1 && array[i].CompareTo(key) > 0)
+                while (i > -1 && func(array[i], key))
                 {
                     array[i + 1] = array[i];
                     i -= 1;
