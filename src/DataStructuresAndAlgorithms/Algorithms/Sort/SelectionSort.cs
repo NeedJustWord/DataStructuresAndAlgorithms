@@ -8,6 +8,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// <para>接着从剩下的元素中继续这种选择和交换方式，最终得到一个有序序列。</para>
     /// <para>因为两个元素才有交换一说，所以最后剩下一个元素的时候不需要再继续选择排序了。</para>
     /// <para>时间复杂度：最好情况：O(n^2)，最坏情况：O(n^2)</para>
+    /// <para>稳定性：不稳定</para>
     /// </summary>
     class SelectionSort : BaseSort
     {
