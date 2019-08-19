@@ -7,7 +7,7 @@ namespace DataStructuresAndAlgorithms
     {
         static void Main(string[] args)
         {
-            ISort sort = GetSort(SortType.Selection);
+            ISort sort = GetSort(SortType.Merge);
             int[] array = InitIntArray();
             SortAsc(sort, array);
 
@@ -28,6 +28,9 @@ namespace DataStructuresAndAlgorithms
                 case SortType.Selection:
                     Console.WriteLine("选择排序");
                     return new SelectionSort();
+                case SortType.Merge:
+                    Console.WriteLine("归并排序");
+                    return new MergeSort();
             }
             throw new NotImplementedException();
         }
@@ -70,5 +73,6 @@ namespace DataStructuresAndAlgorithms
     {
         Insertion,
         Selection,
+        Merge,
     }
 }
