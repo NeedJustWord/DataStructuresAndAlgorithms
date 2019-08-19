@@ -7,7 +7,19 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     abstract class BaseSort : ISort
     {
-        public abstract void Sort<T>(T[] array, bool sortAsc) where T : IComparable<T>;
+        public void Sort<T>(T[] array, bool sortAsc) where T : IComparable<T>
+        {
+            if (sortAsc)
+            {
+                Sort(array, Asc);
+            }
+            else
+            {
+                Sort(array, Desc);
+            }
+        }
+
+        protected abstract void Sort<T>(T[] array, Func<T, T, bool> func) where T : IComparable<T>;
 
         /// <summary>
         /// 判断<paramref name="t1"/>是否比<paramref name="t2"/>大

@@ -13,21 +13,18 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     class InsertionSort : BaseSort
     {
-        public override void Sort<T>(T[] array, bool sortAsc)
+        protected override void Sort<T>(T[] array, Func<T, T, bool> func)
         {
             T key;
             int i;
-            var func = sortAsc ? (Func<T, T, bool>)Asc : Desc;
 
             for (int j = 1; j < array.Length; j++)
             {
                 key = array[j];
                 //将array[j]插入到已排好序的序列array[0...j-1]
-                i = j - 1;
-                while (i > -1 && func(array[i], key))
+                for (i = j - 1; i > -1 && func(array[i], key); i--)
                 {
                     array[i + 1] = array[i];
-                    i -= 1;
                 }
                 array[i + 1] = key;
             }
