@@ -7,7 +7,7 @@ namespace DataStructuresAndAlgorithms
     {
         static void Main(string[] args)
         {
-            ISort sort = new InsertionSort();
+            ISort sort = GetSort(SortType.Selection);
             int[] array = InitIntArray();
             SortAsc(sort, array);
 
@@ -16,6 +16,20 @@ namespace DataStructuresAndAlgorithms
 
             Console.WriteLine("按任意键退出!");
             Console.ReadKey();
+        }
+
+        static ISort GetSort(SortType sortType)
+        {
+            switch (sortType)
+            {
+                case SortType.Insertion:
+                    Console.WriteLine("插入排序");
+                    return new InsertionSort();
+                case SortType.Selection:
+                    Console.WriteLine("选择排序");
+                    return new SelectionSort();
+            }
+            throw new NotImplementedException();
         }
 
         static void SortAsc<T>(ISort sort, T[] array) where T : IComparable<T>
@@ -50,5 +64,11 @@ namespace DataStructuresAndAlgorithms
             }
             Console.WriteLine();
         }
+    }
+
+    enum SortType
+    {
+        Insertion,
+        Selection,
     }
 }
