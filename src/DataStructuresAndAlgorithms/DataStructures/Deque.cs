@@ -3,11 +3,11 @@
 namespace DataStructuresAndAlgorithms.DataStructures
 {
     /// <summary>
-    /// 队列
-    /// <para>先进先出(FIFO)的集合</para>
+    /// 双端队列
+    /// <para>插入和删除操作都可以在两端进行的队列</para>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Queue<T>
+    public class Deque<T>
     {
         private T[] array;
         private int head;
@@ -28,19 +28,19 @@ namespace DataStructuresAndAlgorithms.DataStructures
         public bool IsEmpty => Count == 0;
 
         /// <summary>
-        /// 初始化一个具有默认初始容量的空队列
+        /// 初始化一个具有默认初始容量的空双端队列
         /// </summary>
-        public Queue()
+        public Deque()
         {
             array = emptyArray;
         }
 
         /// <summary>
-        /// 初始化一个初始容量为<paramref name="capacity"/>的空队列
+        /// 初始化一个初始容量为<paramref name="capacity"/>的空双端队列
         /// </summary>
         /// <param name="capacity">初始容量</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public Queue(int capacity)
+        public Deque(int capacity)
         {
             if (capacity < 0) throw new ArgumentOutOfRangeException(nameof(capacity), "不能小于0");
 
@@ -48,19 +48,30 @@ namespace DataStructuresAndAlgorithms.DataStructures
         }
 
         /// <summary>
-        /// 将对象添加到队尾
+        /// 将对象添加到队首
         /// </summary>
         /// <param name="item"></param>
-        public void Enqueue(T item)
+        public void EnqueueHead(T item)
         {
             if (Count == array.Length)
             {
-                int num = (int)(array.LongLength * GrowFactor / 100);
-                if (num < array.Length + MinGrow)
-                {
-                    num = array.Length + MinGrow;
-                }
-                SetCapacity(num);
+                CapacityExpansion();
+            }
+
+            head = (head - 1 + array.Length) % array.Length;
+            array[head] = item;
+            Count++;
+        }
+
+        /// <summary>
+        /// 将对象添加到队尾
+        /// </summary>
+        /// <param name="item"></param>
+        public void EnqueueTail(T item)
+        {
+            if (Count == array.Length)
+            {
+                CapacityExpansion();
             }
 
             array[tail] = item;
@@ -73,7 +84,7 @@ namespace DataStructuresAndAlgorithms.DataStructures
         /// </summary>
         /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
-        public T Dequeue()
+        public T DequeueHead()
         {
             if (Count == 0) throw new InvalidOperationException("队列为空");
 
@@ -85,15 +96,56 @@ namespace DataStructuresAndAlgorithms.DataStructures
         }
 
         /// <summary>
+        /// 移除并返回队尾对象
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <returns></returns>
+        public T DequeueTail()
+        {
+            if (Count == 0) throw new InvalidOperationException("队列为空");
+
+            tail = (tail - 1 + array.Length) % array.Length;
+            T result = array[tail];
+            array[tail] = default;   // 防止继续引用对象
+            Count--;
+            return result;
+        }
+
+        /// <summary>
         /// 返回队首对象而不将其移除
         /// </summary>
         /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
-        public T Peek()
+        public T PeekHead()
         {
             if (Count == 0) throw new InvalidOperationException("队列为空");
 
             return array[head];
+        }
+
+        /// <summary>
+        /// 返回队尾对象而不将其移除
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <returns></returns>
+        public T PeekTail()
+        {
+            if (Count == 0) throw new InvalidOperationException("队列为空");
+
+            return array[(tail - 1 + array.Length) % array.Length];
+        }
+
+        /// <summary>
+        /// 扩容
+        /// </summary>
+        private void CapacityExpansion()
+        {
+            int num = (int)(array.LongLength * GrowFactor / 100);
+            if (num < array.Length + MinGrow)
+            {
+                num = array.Length + MinGrow;
+            }
+            SetCapacity(num);
         }
 
         private void SetCapacity(int capacity)

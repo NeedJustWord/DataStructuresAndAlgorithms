@@ -5,7 +5,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// <summary>
     /// 排序抽象类
     /// </summary>
-    abstract class BaseSort : ISort
+    public abstract class BaseSort : ISort
     {
         public void Sort<T>(T[] array, bool sortAsc) where T : IComparable<T>
         {
@@ -28,7 +28,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
         /// <param name="t1"></param>
         /// <param name="t2"></param>
         /// <returns></returns>
-        protected bool Asc<T>(T t1, T t2) where T : IComparable<T>
+        private bool Asc<T>(T t1, T t2) where T : IComparable<T>
         {
             return t1.CompareTo(t2) > 0;
         }
@@ -40,7 +40,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
         /// <param name="t1"></param>
         /// <param name="t2"></param>
         /// <returns></returns>
-        protected bool Desc<T>(T t1, T t2) where T : IComparable<T>
+        private bool Desc<T>(T t1, T t2) where T : IComparable<T>
         {
             return t1.CompareTo(t2) < 0;
         }

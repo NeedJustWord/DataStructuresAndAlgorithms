@@ -4,9 +4,10 @@ namespace DataStructuresAndAlgorithms.DataStructures
 {
     /// <summary>
     /// 栈
+    /// <para>后进先出(LIFO)的集合</para>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    class Stack<T>
+    public class Stack<T>
     {
         private T[] array;
         private const int defaultCapacity = 4;
@@ -23,7 +24,7 @@ namespace DataStructuresAndAlgorithms.DataStructures
         public bool IsEmpty => Count == 0;
 
         /// <summary>
-        /// 初始化一个初始容量为0的空栈
+        /// 初始化一个具有默认初始容量的空栈
         /// </summary>
         public Stack()
         {
@@ -33,7 +34,8 @@ namespace DataStructuresAndAlgorithms.DataStructures
         /// <summary>
         /// 初始化一个初始容量为<paramref name="capacity"/>的空栈
         /// </summary>
-        /// <param name="capacity"></param>
+        /// <param name="capacity">初始容量</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public Stack(int capacity)
         {
             if (capacity < 0) throw new ArgumentOutOfRangeException(nameof(capacity), "不能小于0");
@@ -42,7 +44,7 @@ namespace DataStructuresAndAlgorithms.DataStructures
         }
 
         /// <summary>
-        /// 入栈
+        /// 在栈顶插入一个对象
         /// </summary>
         /// <param name="item"></param>
         public void Push(T item)
@@ -58,18 +60,23 @@ namespace DataStructuresAndAlgorithms.DataStructures
         }
 
         /// <summary>
-        /// 出栈
+        /// 移除并返回栈顶对象
         /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <returns></returns>
         public T Pop()
         {
             if (Count == 0) throw new InvalidOperationException("栈为空");
 
-            return array[--Count];
+            T result = array[--Count];
+            array[Count] = default;   // 防止继续引用对象
+            return result;
         }
 
         /// <summary>
-        /// 查看栈顶元素
+        /// 返回栈顶对象而不将其移除
         /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
         public T Peek()
         {

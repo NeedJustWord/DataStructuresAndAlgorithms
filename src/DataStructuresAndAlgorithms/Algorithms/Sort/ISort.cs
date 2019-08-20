@@ -5,7 +5,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// <summary>
     /// 排序接口
     /// </summary>
-    interface ISort
+    public interface ISort
     {
         /// <summary>
         /// 排序方法

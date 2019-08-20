@@ -10,7 +10,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// <para>时间复杂度：最好情况：O(n^2)，最坏情况：O(n^2)</para>
     /// <para>稳定性：不稳定</para>
     /// </summary>
-    class SelectionSort : BaseSort
+    public class SelectionSort : BaseSort
     {
         protected override void Sort<T>(T[] array, Func<T, T, bool> func)
         {
