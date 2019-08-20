@@ -1,7 +1,7 @@
 ﻿using System;
 using DataStructuresAndAlgorithms.Algorithms.Sort;
 
-namespace DataStructuresAndAlgorithms
+namespace ConsoleApp
 {
     class Program
     {
