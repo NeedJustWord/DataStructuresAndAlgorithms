@@ -7,17 +7,18 @@ namespace DataStructuresAndAlgorithms.DataStructures
     /// <para>每个结点最多有两个子树的树结构</para>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinaryTree<T>
+    public abstract class BinaryTree<T>
     {
         /// <summary>
         /// 根节点
         /// </summary>
-        public BinaryTreeNode<T> Root { get; private set; }
+        public BinaryTreeNode<T> Root { get; protected set; }
 
+        #region 构造函数
         /// <summary>
         /// 创建一棵空二叉树
         /// </summary>
-        public BinaryTree()
+        protected BinaryTree()
         {
         }
 
@@ -25,28 +26,11 @@ namespace DataStructuresAndAlgorithms.DataStructures
         /// 创建一棵根节点为<paramref name="data"/>的二叉树
         /// </summary>
         /// <param name="data"></param>
-        public BinaryTree(T data)
+        protected BinaryTree(T data)
         {
             Root = new BinaryTreeNode<T>(data);
         }
-
-        /// <summary>
-        /// 设置根节点数据，返回根节点
-        /// </summary>
-        /// <param name="data">根节点数据</param>
-        /// <returns></returns>
-        public BinaryTreeNode<T> SetRootData(T data)
-        {
-            if (Root == null)
-            {
-                Root = new BinaryTreeNode<T>(data);
-            }
-            else
-            {
-                Root.Data = data;
-            }
-            return Root;
-        }
+        #endregion
 
         #region 遍历
 
