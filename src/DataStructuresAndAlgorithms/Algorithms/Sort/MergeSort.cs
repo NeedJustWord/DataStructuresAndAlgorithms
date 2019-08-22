@@ -14,12 +14,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     public class MergeSort : BaseSort
     {
-        protected override void Sort<T>(T[] array, Func<T, T, bool> func)
-        {
-            Sort(array, 0, array.Length - 1, func);
-        }
-
-        private void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
+        protected override void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
         {
             if (left < right)
             {
@@ -35,7 +30,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
 
         private void Merge<T>(T[] array, int left, int middle, int right, Func<T, T, bool> func)
         {
-            T[] temp = new T[right - left + 1];
+            T[] sort = new T[right - left + 1];
             int i = left, j = middle + 1, k = 0;
 
             //按顺序移入新数组，直到其中一个数组为空
@@ -43,30 +38,30 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
             {
                 if (func(array[i], array[j]))
                 {
-                    temp[k++] = array[j++];
+                    sort[k++] = array[j++];
                 }
                 else
                 {
-                    temp[k++] = array[i++];
+                    sort[k++] = array[i++];
                 }
             }
 
             //将左边剩余的数移入数组
             while (i <= middle)
             {
-                temp[k++] = array[i++];
+                sort[k++] = array[i++];
             }
 
             //将右边剩余的数移入数组
             while (j <= right)
             {
-                temp[k++] = array[j++];
+                sort[k++] = array[j++];
             }
 
             //将新数组覆盖array的[left,right]
-            for (k = 0; k < temp.Length; k++)
+            for (k = 0; k < sort.Length; k++)
             {
-                array[k + left] = temp[k];
+                array[left + k] = sort[k];
             }
         }
     }

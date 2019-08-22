@@ -14,16 +14,16 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     public class InsertionSort : BaseSort
     {
-        protected override void Sort<T>(T[] array, Func<T, T, bool> func)
+        protected override void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
         {
             T key;
             int i;
 
-            for (int j = 1; j < array.Length; j++)
+            for (int j = left + 1; j <= right; j++)
             {
                 key = array[j];
-                //将array[j]插入到已排好序的序列array[0...j-1]
-                for (i = j - 1; i > -1 && func(array[i], key); i--)
+                //将array[j]插入到已排好序的序列array[left...j-1]
+                for (i = j - 1; i >= left && func(array[i], key); i--)
                 {
                     array[i + 1] = array[i];
                 }

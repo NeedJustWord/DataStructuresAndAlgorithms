@@ -12,16 +12,16 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     public class SelectionSort : BaseSort
     {
-        protected override void Sort<T>(T[] array, Func<T, T, bool> func)
+        protected override void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
         {
             T temp;
-            int j, keyIndex, lastIndex = array.Length - 1;
+            int j, keyIndex;
 
-            for (int i = 0; i < lastIndex; i++)
+            for (int i = left; i < right; i++)
             {
-                //在待排序序列[i...n-1]里找出关键元素(最大或最小)的下标
+                //在待排序序列[i...right]里找出关键元素(最大或最小)的下标
                 keyIndex = i;
-                for (j = i + 1; j < array.Length; j++)
+                for (j = i + 1; j <= right; j++)
                 {
                     if (func(array[keyIndex], array[j]))
                     {
