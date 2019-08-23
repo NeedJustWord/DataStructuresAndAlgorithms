@@ -38,11 +38,12 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
             if (left < 0 || left >= array.Length) throw new ArgumentOutOfRangeException(nameof(left));
             if (right < left || right >= array.Length) throw new ArgumentOutOfRangeException(nameof(right));
 
-            if (sortAsc) Sort(array, left, right, Asc);
-            else Sort(array, left, right, Desc);
+            SortInternal(array, left, right, sortAsc);
         }
 
-        protected abstract void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func) where T : IComparable<T>;
+        protected abstract void SortInternal<T>(T[] array, int left, int right, bool sortAsc) where T : IComparable<T>;
+
+        protected Func<T, T, bool> GetFunc<T>(bool sortAsc) where T : IComparable<T> => sortAsc ? (Func<T, T, bool>)Asc : Desc;
 
         /// <summary>
         /// 判断<paramref name="t1"/>是否比<paramref name="t2"/>大
@@ -51,10 +52,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
         /// <param name="t1"></param>
         /// <param name="t2"></param>
         /// <returns></returns>
-        private bool Asc<T>(T t1, T t2) where T : IComparable<T>
-        {
-            return t1.CompareTo(t2) > 0;
-        }
+        private bool Asc<T>(T t1, T t2) where T : IComparable<T> => t1.CompareTo(t2) > 0;
 
         /// <summary>
         /// 判断<paramref name="t1"/>是否比<paramref name="t2"/>小
@@ -63,9 +61,6 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
         /// <param name="t1"></param>
         /// <param name="t2"></param>
         /// <returns></returns>
-        private bool Desc<T>(T t1, T t2) where T : IComparable<T>
-        {
-            return t1.CompareTo(t2) < 0;
-        }
+        private bool Desc<T>(T t1, T t2) where T : IComparable<T> => t1.CompareTo(t2) < 0;
     }
 }

@@ -14,7 +14,13 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     public class MergeSort : BaseSort
     {
-        protected override void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
+        protected override void SortInternal<T>(T[] array, int left, int right, bool sortAsc)
+        {
+            var func = GetFunc<T>(sortAsc);
+            Sort(array, left, right, func);
+        }
+
+        private void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
         {
             if (left < right)
             {

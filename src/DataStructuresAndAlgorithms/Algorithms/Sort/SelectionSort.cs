@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DataStructuresAndAlgorithms.Algorithms.Sort
+﻿namespace DataStructuresAndAlgorithms.Algorithms.Sort
 {
     /// <summary>
     /// 选择排序
@@ -12,8 +10,9 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     public class SelectionSort : BaseSort
     {
-        protected override void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
+        protected override void SortInternal<T>(T[] array, int left, int right, bool sortAsc)
         {
+            var func = GetFunc<T>(sortAsc);
             T temp;
             int j, keyIndex;
 

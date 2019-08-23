@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DataStructuresAndAlgorithms.Algorithms.Sort
+﻿namespace DataStructuresAndAlgorithms.Algorithms.Sort
 {
     /// <summary>
     /// 插入排序：对于少量元素的排序，它是一个有效的算法
@@ -14,8 +12,9 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// </summary>
     public class InsertionSort : BaseSort
     {
-        protected override void Sort<T>(T[] array, int left, int right, Func<T, T, bool> func)
+        protected override void SortInternal<T>(T[] array, int left, int right, bool sortAsc)
         {
+            var func = GetFunc<T>(sortAsc);
             T key;
             int i;
 
