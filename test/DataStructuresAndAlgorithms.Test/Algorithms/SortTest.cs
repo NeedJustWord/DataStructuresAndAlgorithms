@@ -32,6 +32,59 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         }
         #endregion
 
+        #region 选择排序测试用例
+        [Fact]
+        public void SelectionSortAscTest()
+        {
+            bool sortAsc = true;
+            var array = GetRandomArray();
+            var sort = new SelectionSort();
+            sort.Sort(array, sortAsc);
+
+            bool flag = CheckArray(array, sortAsc);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void SelectionSortDescTest()
+        {
+            bool sortAsc = false;
+            var array = GetRandomArray();
+            var sort = new SelectionSort();
+            sort.Sort(array, sortAsc);
+
+            bool flag = CheckArray(array, sortAsc);
+            Assert.True(flag);
+        }
+        #endregion
+
+        #region 归并排序测试用例
+        [Fact]
+        public void MergeSortAscTest()
+        {
+            bool sortAsc = true;
+            var array = GetRandomArray();
+            var sort = new MergeSort();
+            sort.Sort(array, sortAsc);
+
+            bool flag = CheckArray(array, sortAsc);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void MergeSortDescTest()
+        {
+            bool sortAsc = false;
+            var array = GetRandomArray();
+            var sort = new MergeSort();
+            sort.Sort(array, sortAsc);
+
+            bool flag = CheckArray(array, sortAsc);
+            Assert.True(flag);
+        }
+        #endregion
+
+        #region 私有方法
         private bool CheckArray(int[] array, bool sortAsc)
         {
             return sortAsc ? IsAsc(array) : IsDesc(array);
@@ -76,5 +129,6 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
             Random random = new Random(Guid.NewGuid().GetHashCode());
             return random.Next(minValue, maxValue);
         }
+        #endregion
     }
 }
