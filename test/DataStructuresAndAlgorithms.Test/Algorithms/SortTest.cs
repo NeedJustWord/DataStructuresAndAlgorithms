@@ -116,10 +116,10 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
 
         private int[] GetRandomArray()
         {
-            int[] nums = new int[100];
+            int[] nums = new int[10000];
             for (int i = 0; i < nums.Length; i++)
             {
-                nums[i] = GetRandomNumber(0, 1000);
+                nums[i] = GetRandomNumber(0, 10000);
             }
             return nums;
         }
