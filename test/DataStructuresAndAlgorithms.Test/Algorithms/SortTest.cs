@@ -7,10 +7,12 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
     public class SortTest
     {
         private SortNode[] array;
+        private SortNode[] stableArray;
 
         public SortTest()
         {
             array = GetRandomArray();
+            stableArray = GetStableArray();
         }
 
         #region 插入排序测试用例
@@ -18,7 +20,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         public void InsertionSortAscTest()
         {
             bool sortAsc = true;
-            var copyArray = CopyArray();
+            var copyArray = CopyArray(array);
             var sort = new InsertionSort();
             sort.Sort(copyArray, sortAsc);
 
@@ -30,8 +32,58 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         public void InsertionSortDescTest()
         {
             bool sortAsc = false;
-            var copyArray = CopyArray();
+            var copyArray = CopyArray(array);
             var sort = new InsertionSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+        #endregion
+
+        #region 优化版插入排序测试用例
+        [Fact]
+        public void OptimizingInsertionSortAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(array);
+            var sort = new OptimizingInsertionSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void OptimizingInsertionSortDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(array);
+            var sort = new OptimizingInsertionSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void OptimizingInsertionSortStableAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(stableArray);
+            var sort = new OptimizingInsertionSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void OptimizingInsertionSortStableDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(stableArray);
+            var sort = new OptimizingInsertionSort();
             sort.Sort(copyArray, sortAsc);
 
             bool flag = CheckArray(copyArray, sortAsc, true);
@@ -44,7 +96,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         public void SelectionSortAscTest()
         {
             bool sortAsc = true;
-            var copyArray = CopyArray();
+            var copyArray = CopyArray(array);
             var sort = new SelectionSort();
             sort.Sort(copyArray, sortAsc);
 
@@ -56,7 +108,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         public void SelectionSortDescTest()
         {
             bool sortAsc = false;
-            var copyArray = CopyArray();
+            var copyArray = CopyArray(array);
             var sort = new SelectionSort();
             sort.Sort(copyArray, sortAsc);
 
@@ -70,7 +122,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         public void MergeSortAscTest()
         {
             bool sortAsc = true;
-            var copyArray = CopyArray();
+            var copyArray = CopyArray(array);
             var sort = new MergeSort();
             sort.Sort(copyArray, sortAsc);
 
@@ -82,7 +134,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         public void MergeSortDescTest()
         {
             bool sortAsc = false;
-            var copyArray = CopyArray();
+            var copyArray = CopyArray(array);
             var sort = new MergeSort();
             sort.Sort(copyArray, sortAsc);
 
@@ -128,7 +180,6 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
             return true;
         }
 
-
         private bool IsStableAsc(SortNode[] array)
         {
             for (int i = 1; i < array.Length; i++)
@@ -161,7 +212,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
             return true;
         }
 
-        private SortNode[] CopyArray()
+        private SortNode[] CopyArray(SortNode[] array)
         {
             var result = new SortNode[array.Length];
             Array.Copy(array, 0, result, 0, array.Length);
@@ -175,6 +226,18 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
             for (int i = 0; i < nums.Length; i++)
             {
                 value = GetRandomNumber(0, 10000);
+                nums[i] = new SortNode(i, value);
+            }
+            return nums;
+        }
+
+        private SortNode[] GetStableArray()
+        {
+            SortNode[] nums = new SortNode[100];
+            int value;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                value = i % 10;
                 nums[i] = new SortNode(i, value);
             }
             return nums;
