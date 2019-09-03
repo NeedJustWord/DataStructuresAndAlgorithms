@@ -8,6 +8,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
     {
         private SortNode[] array;
         private SortNode[] stableArray;
+        private int k = 7;
 
         public SortTest()
         {
@@ -33,6 +34,30 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         {
             bool sortAsc = false;
             var copyArray = CopyArray(array);
+            var sort = new InsertionSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableInsertionSortAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(stableArray);
+            var sort = new InsertionSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableInsertionSortDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(stableArray);
             var sort = new InsertionSort();
             sort.Sort(copyArray, sortAsc);
 
@@ -67,7 +92,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         }
 
         [Fact]
-        public void OptimizingInsertionSortStableAscTest()
+        public void StableOptimizingInsertionSortAscTest()
         {
             bool sortAsc = true;
             var copyArray = CopyArray(stableArray);
@@ -79,7 +104,7 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         }
 
         [Fact]
-        public void OptimizingInsertionSortStableDescTest()
+        public void StableOptimizingInsertionSortDescTest()
         {
             bool sortAsc = false;
             var copyArray = CopyArray(stableArray);
@@ -136,6 +161,80 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
             bool sortAsc = false;
             var copyArray = CopyArray(array);
             var sort = new MergeSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableMergeSortAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(stableArray);
+            var sort = new MergeSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableMergeSortDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(stableArray);
+            var sort = new MergeSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+        #endregion
+
+        #region 优化版归并排序测试用例
+        [Fact]
+        public void OptimizingMergeSortAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(array);
+            var sort = new OptimizingMergeSort(k);
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void OptimizingMergeSortDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(array);
+            var sort = new OptimizingMergeSort(k);
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableOptimizingMergeSortAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(stableArray);
+            var sort = new OptimizingMergeSort(k);
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableOptimizingMergeSortDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(stableArray);
+            var sort = new OptimizingMergeSort(k);
             sort.Sort(copyArray, sortAsc);
 
             bool flag = CheckArray(copyArray, sortAsc, true);
@@ -233,11 +332,11 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
 
         private SortNode[] GetStableArray()
         {
-            SortNode[] nums = new SortNode[100];
+            SortNode[] nums = new SortNode[10000];
             int value;
             for (int i = 0; i < nums.Length; i++)
             {
-                value = i % 10;
+                value = i % 100;
                 nums[i] = new SortNode(i, value);
             }
             return nums;

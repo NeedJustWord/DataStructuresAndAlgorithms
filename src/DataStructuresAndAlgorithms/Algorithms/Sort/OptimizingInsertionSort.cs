@@ -39,7 +39,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
         /// <param name="key"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        private int GetInsertIndex<T>(T[] array, int left, int right, T key, Func<T, T, bool> func) where T : IComparable<T>
+        private int GetInsertIndex<T>(T[] array, int left, int right, T key, Func<T, T, bool> func)
         {
             int middle;
             while (left < right)
