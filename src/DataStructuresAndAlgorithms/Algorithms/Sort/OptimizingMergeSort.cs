@@ -5,6 +5,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
     /// <summary>
     /// 优化版归并排序
     /// <para>优化1：对小数组采用插入排序</para>
+    /// <para>优化2：左右两边无序的时候才需要归并</para>
     /// </summary>
     public class OptimizingMergeSort : BaseSort
     {
@@ -32,6 +33,7 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
         {
             if (right - left <= K)
             {
+                // 优化1：当数组长度小于K时，改用插入排序
                 InsertSortInternal(array, left, right, func);
                 return;
             }
@@ -41,8 +43,12 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
             Sort(array, left, middle, func);
             //排序右半边
             Sort(array, middle + 1, right, func);
-            //左右归并
-            Merge(array, left, middle, right, func);
+
+            if (func(array[middle], array[middle + 1]))
+            {
+                // 优化2：左边最后一个和右边第一个无序才需要归并
+                Merge(array, left, middle, right, func);
+            }
         }
 
         private void Merge<T>(T[] array, int left, int middle, int right, Func<T, T, bool> func)
