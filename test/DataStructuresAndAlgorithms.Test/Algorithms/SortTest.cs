@@ -242,6 +242,56 @@ namespace DataStructuresAndAlgorithms.Test.Algorithms
         }
         #endregion
 
+        #region 冒泡排序测试用例
+        [Fact]
+        public void BubbleSortAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(array);
+            var sort = new BubbleSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void BubbleSortDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(array);
+            var sort = new BubbleSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableBubbleSortAscTest()
+        {
+            bool sortAsc = true;
+            var copyArray = CopyArray(stableArray);
+            var sort = new BubbleSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+
+        [Fact]
+        public void StableBubbleSortDescTest()
+        {
+            bool sortAsc = false;
+            var copyArray = CopyArray(stableArray);
+            var sort = new BubbleSort();
+            sort.Sort(copyArray, sortAsc);
+
+            bool flag = CheckArray(copyArray, sortAsc, true);
+            Assert.True(flag);
+        }
+        #endregion
+
         #region 私有方法
         private bool CheckArray(SortNode[] array, bool sortAsc, bool isStable)
         {

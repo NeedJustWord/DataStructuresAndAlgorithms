@@ -108,8 +108,8 @@ namespace DataStructuresAndAlgorithms.Algorithms.Sort
         }
 
         /// <summary>
-        /// 升序的时候，找到不小于<paramref name="key"/>的最大下标
-        /// 降序的时候，找到不大于<paramref name="key"/>的最大下标
+        /// <para>升序的时候，找到不小于<paramref name="key"/>的最大下标</para>
+        /// <para>降序的时候，找到不大于<paramref name="key"/>的最大下标</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
